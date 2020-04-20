@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron-better-ipc'
-import { VideoConverterIpcEnum } from '../../../common/ipc-events/video-converter.ipc.events'
-import { IVideoConverterStart } from '../../../common/services/video-converter.types'
+import { VideoConverterIpcEnum } from '../../common/ipc-events/video-converter.ipc.events'
+import { IVideoConverterStart } from '../../common/services/video-converter.types'
 import { VideoConverterService } from '../../services/video-converter/video-converter.service'
 
 // Listeners
@@ -16,7 +16,7 @@ export function videoConverterIpc () {
         event.reply(VideoConverterIpcEnum.PROGRESS, { timemark })
       },
       function onError (error: any) {
-        event.reply(VideoConverterIpcEnum.ERROR, error)
+        event.reply(VideoConverterIpcEnum.ERROR, error.message)
       },
       function onFinish (output) {
         event.reply(VideoConverterIpcEnum.FINISH, { output })

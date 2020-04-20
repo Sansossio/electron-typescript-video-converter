@@ -4,7 +4,7 @@ import { videoConverterStart } from '../../ipc/video-converter/video-converter-s
 import { IVideoConverterViewState } from './types/video-converter.view.state'
 import { VideoPreviewComponent } from '../../components/video-preview/video-preview.component'
 import { IVideoData } from '../../common/types/video-data.type'
-import { IVideoConverterFormatEnum } from '../../../common/services/video-converter.types'
+import { IVideoConverterFormatEnum } from '../../../src/common/services/video-converter.types'
 import { listenerVideoConverterProgress } from '../../ipc/video-converter/video-converter-progress.ipc'
 import { listenerVideoConverterFinish } from '../../ipc/video-converter/video-converter-finish.ipc'
 import { listenerVideoConverterError } from '../../ipc/video-converter/video-converter-error.ipc'
