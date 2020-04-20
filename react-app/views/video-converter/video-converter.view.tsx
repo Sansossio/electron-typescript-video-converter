@@ -8,15 +8,21 @@ import { IVideoData } from '../../common/types/video-data.type'
 export class VideoConverterView extends React.Component<{}, IVideoConverterViewState> {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      videoPath: 's'
+    }
+  }
+  private resetVideo () {
+    this.setState({ videoPath: null, videoType: null })
   }
 
   onDropFilePath ({ path: videoPath, type: videoType }: IVideoData) {
     this.setState({ videoPath, videoType })
   }
 
-  onDropInit () {
-    this.setState({ videoPath: null, videoType: null })
+  onChangeVideo (e) {
+    e.preventDefault()
+    this.resetVideo()
   }
 
   render () {
@@ -27,14 +33,20 @@ export class VideoConverterView extends React.Component<{}, IVideoConverterViewS
     if (!videoPath) {
       return (
         <DropzoneComponent
-          onDropInit={this.onDropInit.bind(this)}
+          onDropInit={() => this.resetVideo()}
           onDropFilePath={this.onDropFilePath.bind(this)}
         />
       )
     }
     return (
       <>
+        <button onClick={e => this.onChangeVideo(e)}>
+          Change video
+        </button>
+        <hr />
         <VideoPreviewComponent path={videoPath} type={videoType} />
+        <div id='control-buttons'>
+        </div>
       </>
     )
   }
