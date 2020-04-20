@@ -3,6 +3,6 @@ import * as ReactDOM from 'react-dom'
 import { AppRouter } from './app-router'
 
 ReactDOM.render(
-  <AppRouter/>,
+  <AppRouter />,
   document.getElementById('root')
 )

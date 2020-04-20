@@ -8,6 +8,7 @@ export function VideoPreviewComponent (props: IVideoData) {
       height='auto'
       autoPlay
       controls
+      onError={props.onError}
     >
       <source src={props.path} type={props.type} />
     </video>

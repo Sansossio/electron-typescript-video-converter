@@ -2,6 +2,6 @@ import { VideoConverterIpcEnum } from '../../../common/ipc-events/video-converte
 import { IVideoConverterStart } from '../../../common/services/video-converter.types'
 const { ipcRenderer } = window.require('electron-better-ipc')
 
-export function videoConverterStart (video: IVideoConverterStart) {
-  ipcRenderer.send(VideoConverterIpcEnum.START, video)
+export function listenerVideoConverterFinish (cb) {
+  ipcRenderer.on(VideoConverterIpcEnum.FINISH, (_, event) => cb(event))
 }
