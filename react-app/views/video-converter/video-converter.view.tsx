@@ -8,10 +8,7 @@ import { IVideoData } from '../../common/types/video-data.type'
 export class VideoConverterView extends React.Component<{}, IVideoConverterViewState> {
   constructor (props) {
     super(props)
-    this.state = {
-      videoPath: 'C:\\Users\\julio\\Downloads\\10-8_EUW1-4544827484_02.mp4',
-      videoType: 'video/mp4'
-    }
+    this.state = {}
   }
 
   onDropFilePath ({ path: videoPath, type: videoType }: IVideoData) {
@@ -27,13 +24,17 @@ export class VideoConverterView extends React.Component<{}, IVideoConverterViewS
       videoPath,
       videoType
     } = this.state
-    return (
-      <>
+    if (!videoPath) {
+      return (
         <DropzoneComponent
           onDropInit={this.onDropInit.bind(this)}
           onDropFilePath={this.onDropFilePath.bind(this)}
         />
-        {videoPath && <VideoPreviewComponent path={videoPath} type={videoType} />}
+      )
+    }
+    return (
+      <>
+        <VideoPreviewComponent path={videoPath} type={videoType} />
       </>
     )
   }
