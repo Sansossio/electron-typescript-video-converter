@@ -1,10 +1,15 @@
 import * as Ffmpeg from 'fluent-ffmpeg'
+import * as isDev from 'electron-is-dev'
 import * as FfmpegInstaller from '@ffmpeg-installer/ffmpeg'
 import * as path from 'path'
 import * as fs from 'fs'
 import { IVideoConverterStart, IVideoConverterFormatEnum } from '../../common/services/video-converter.types'
 
-Ffmpeg.setFfmpegPath(FfmpegInstaller.path)
+let ffmpegPath = FfmpegInstaller.path
+if (!isDev) {
+  ffmpegPath = ffmpegPath.replace('app.asar', 'app.asar.unpacked')
+}
+Ffmpeg.setFfmpegPath(ffmpegPath)
 
 export class VideoConverterService {
   private static getExtension (format: IVideoConverterFormatEnum) {
@@ -45,7 +50,9 @@ export class VideoConverterService {
       .on('error', error => {
         try {
           fs.unlinkSync(output)
-        } catch (e) {}
+        } catch (e) {
+          console.error(e)
+        }
         onError(error)
       })
       .on('end', () => {
