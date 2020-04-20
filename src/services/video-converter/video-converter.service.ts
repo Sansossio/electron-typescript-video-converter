@@ -2,7 +2,7 @@ import * as Ffmpeg from 'fluent-ffmpeg'
 import * as FfmpegInstaller from '@ffmpeg-installer/ffmpeg'
 import * as path from 'path'
 import * as fs from 'fs'
-import { IVideoConverterStart, IVideoConverterFormatEnum } from '../../../common/services/video-converter.types'
+import { IVideoConverterStart, IVideoConverterFormatEnum } from '../../common/services/video-converter.types'
 
 Ffmpeg.setFfmpegPath(FfmpegInstaller.path)
 
@@ -43,7 +43,9 @@ export class VideoConverterService {
         onProgress(progressData.timemark)
       })
       .on('error', error => {
-        fs.unlinkSync(output)
+        try {
+          fs.unlinkSync(output)
+        } catch (e) {}
         onError(error)
       })
       .on('end', () => {
