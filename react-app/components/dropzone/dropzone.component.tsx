@@ -6,27 +6,31 @@ import { dropzoneTypeValidationUtils } from './utils/dropzone-type-validation.ut
 import './dropzone.component.scss'
 import { showNotification } from '../../os/notification/notification'
 import { NotificationTypeEnum } from '../../os/notification/notification.types'
+import { IDropzoneComponentProps } from './types/dropzone.component.props'
 
-export class DropzoneComponent extends React.Component {
+export class DropzoneComponent extends React.Component<IDropzoneComponentProps, {}> {
   onDrop (file: IFileDropzone) {
     const { type, path } = file
-    if (!dropzoneTypeValidationUtils(type)) {
-      const title = 'Not valid file error'
-      const message = 'File must be a video'
-      showNotification(
-        NotificationTypeEnum.ERROR,
-        title,
-        message
-      )
+    const isValidfile = dropzoneTypeValidationUtils(type)
+    if (isValidfile) {
+      this.props.onDropFilePath(path)
       return
     }
-    console.log(path)
+
+    const title = 'Not valid file error'
+    const message = 'File must be a video'
+    showNotification(
+      NotificationTypeEnum.ERROR,
+      title,
+      message
+    )
   }
 
   render () {
     return (
       <StyledDropZone
-        onDrop={this.onDrop}
+        dontRead
+        onDrop={file => this.onDrop(file)}
       />
     )
   }
