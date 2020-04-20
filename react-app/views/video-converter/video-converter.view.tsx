@@ -8,9 +8,7 @@ import { IVideoData } from '../../common/types/video-data.type'
 export class VideoConverterView extends React.Component<{}, IVideoConverterViewState> {
   constructor (props) {
     super(props)
-    this.state = {
-      videoPath: 's'
-    }
+    this.state = {}
   }
   private resetVideo () {
     this.setState({ videoPath: null, videoType: null })
