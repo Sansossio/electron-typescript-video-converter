@@ -10,10 +10,15 @@ import { IDropzoneComponentProps } from './types/dropzone.component.props'
 
 export class DropzoneComponent extends React.Component<IDropzoneComponentProps, {}> {
   onDrop (file: IFileDropzone) {
+    this.props.onDropInit()
     const { type, path } = file
     const isValidfile = dropzoneTypeValidationUtils(type)
     if (isValidfile) {
-      this.props.onDropFilePath(path)
+      // TODO improve this shit xd
+      // We are using this timeout because isnt, react wont be able to remove previous video
+      setTimeout(() => {
+        this.props.onDropFilePath({ path, type })
+      }, 100)
       return
     }
 

@@ -1,3 +1,6 @@
+import { IVideoData } from '../../../common/types/video-data.type'
+
 export interface IDropzoneComponentProps {
-  onDropFilePath: (path: string) => void
+  onDropFilePath: (data: IVideoData) => void
+  onDropInit: () => void
 }
