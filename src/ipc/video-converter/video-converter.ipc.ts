@@ -12,7 +12,6 @@ export function videoConverterIpc () {
     VideoConverterService.convert(
       video,
       function onProgress (timemark: string) {
-        console.log(timemark)
         event.reply(VideoConverterIpcEnum.PROGRESS, { timemark })
       },
       function onError (error: any) {
