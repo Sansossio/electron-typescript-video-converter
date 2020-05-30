@@ -2,7 +2,7 @@
 Electron + typescript video converter basic tool
 
 ## Start
-```npm run start```
+```npm start```
 
 ## Manual Start
 First we need to start react
