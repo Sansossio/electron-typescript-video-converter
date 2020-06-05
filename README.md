@@ -11,9 +11,6 @@ First we need to start react
 And then, start electron
 ```npm run start:electron```
 
-## Build
-```npm run build```
-
 # Important
 Right now, it only works with webm video files to mp4
 
